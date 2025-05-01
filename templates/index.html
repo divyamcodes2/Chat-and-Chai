@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Set character encoding to UTF-8 -->
+    <meta charset="UTF-8" />
+    <!-- Make the layout responsive on all devices -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Set the title of the page -->
+    <title>Chat and Chai</title>
+
+    <!-- Load Socket.IO client library for real-time communication -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+
+    <!-- Link to the external CSS file using Flask's url_for function -->
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles.css') }}"
+    />
+  </head>
+
+  <body>
+    <!-- Display a welcome message with the user's name injected from Flask -->
+    <h2>Welcome, <span id="username">{{ username }}</span>!</h2>
+
+    <!-- Main container for sidebar and chat area -->
+    <div class="container">
+      <!-- Sidebar containing room list and active users -->
+      <div class="sidebar">
+        <!-- Room list section -->
+        <div class="room-list">
+          <h3>Rooms</h3>
+          <!-- Loop through all available rooms using Flask -->
+          {% for room in rooms %}
+          <!-- Each room is clickable to join that room -->
+          <div class="room-item" onclick="joinRoom('{{ room }}')">
+            {{ room }}
+          </div>
+          {% endfor %}
+        </div>
+
+        <!-- Active users list section -->
+        <div class="user-list">
+          <h3>Online Users</h3>
+          <!-- User list will be dynamically updated by JavaScript -->
+          <div id="active-users"></div>
+        </div>
+      </div>
+
+      <!-- Main chat area -->
+      <div class="main-chat">
+        <!-- Chat message display area -->
+        <div id="chat"></div>
+
+        <!-- Input area for typing and sending messages -->
+        <div class="input-area">
+          <!-- Input field for typing a message -->
+          <input
+            id="message"
+            type="text"
+            placeholder="Type a message..."
+            onkeypress="handleKeyPress(event)"
+            <!--
+            Allows
+            sending
+            message
+            on
+            Enter
+            --
+          />
+          />
+          <!-- Button to send the message -->
+          <button onclick="sendMessage()">Send</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Load external JavaScript file for chat logic -->
+    <script src="{{ url_for('static', filename='chat.js') }}"></script>
+  </body>
+</html>
