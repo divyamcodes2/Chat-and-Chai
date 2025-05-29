@@ -36,10 +36,10 @@ class Config:
 
     # Available chat rooms - stored as constant for now, could be moved to database
     CHAT_ROOMS = [
-        'General',
-        'Zero to Knowing',
-        'Code with Josh',
-        'The Nerd Nook'
+        'ASCII Me Anything',
+        '404 Not Found',
+        'No Typo Zone',
+        'Byte Me'
     ]
 
 
